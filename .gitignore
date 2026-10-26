@@ -1,0 +1,58 @@
+# ── Python ──────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+*.so
+.venv/
+venv/
+env/
+# ── Media & Render Outputs ───────────────────────────
+Video_Outputs/
+*.mp4
+*.docx
+*.mp3
+*.wav
+*.ogg
+*.pkl
+*.zip
+
+# ── Node / Frontend ──────────────────────────────────
+node_modules/
+frontend/dist/
+frontend/.vite/
+*.log
+npm-debug.log*
+
+# ── Database / WAL (large binary, not for git) ───────
+data/astronaut_health.db
+data/astronaut_health.db-shm
+data/astronaut_health.db-wal
+astronaut_health.db
+astronaut_health.db-shm
+astronaut_health.db-waol
+*.db-wal
+*.db-shm
+data/*.db*
+
+# ── IDE / OS ─────────────────────────────────────────
+.vscode/
+.idea/
+*.DS_Store
+Thumbs.db
+~$*
+~$*.docx
+
+# ── Secrets ──────────────────────────────────────────
+.env
+.env.local
+*.pem
+*.key
+
+# ── AGY / IDE internals ──────────────────────────────
+.agents/
