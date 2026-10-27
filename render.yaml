@@ -17,7 +17,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: NODE_VERSION
-        value: 20.12.0
+        value: "22"
       - key: DETERMINISTIC_FALLBACK_ACTIVE
         value: "true"
       # Optional: set GROQ_API_KEY or OPENAI_API_KEY in Render dashboard for cloud LLM reasoning with 0MB RAM overhead

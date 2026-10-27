@@ -496,7 +496,7 @@ services:
       - key: PYTHON_VERSION
         value: 3.11.9
       - key: NODE_VERSION
-        value: 20.11.0
+        value: "22"
       - key: MARS_DELAY_SIMULATION
         value: "false"
 ```

@@ -260,7 +260,7 @@ See [`documentation/dataset_coverage_analysis.md`](documentation/dataset_coverag
   uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
   ```
 - **Environment Variables**:
-  - `NODE_VERSION`: `20.12.0`
+  - `NODE_VERSION`: `22`
   - `PYTHON_VERSION`: `3.11.9`
   - `DETERMINISTIC_FALLBACK_ACTIVE`: `true`
 
