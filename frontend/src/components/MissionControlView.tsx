@@ -519,7 +519,7 @@ export const MissionControlView: React.FC<MissionControlViewProps> = ({
       const spo2D = pkt.spo2 - crew.baseSpo2;
 
       // Special Scenario: Acute Hypokalemia & Tachyarrhythmia
-      if (isHypokalemiaScen || (!isNominalFlight && ((pkt.potassium !== undefined && pkt.potassium < 3.5) || (pkt.computed_qtc && pkt.computed_qtc > 450))) || (pkt.potassium !== undefined && pkt.potassium < 3.2)) {
+      if (isHypokalemiaScen || (!isNominalFlight && ((pkt.potassium !== undefined && pkt.potassium < 3.40) || (pkt.computed_qtc && pkt.computed_qtc > 450))) || (pkt.potassium !== undefined && pkt.potassium < 3.2)) {
         const kVal = pkt.potassium !== undefined ? pkt.potassium : 3.20;
         const qtcVal = pkt.computed_qtc || 482;
         const arfVal = pkt.computed_arf || 1.85;
@@ -1007,9 +1007,9 @@ export const MissionControlView: React.FC<MissionControlViewProps> = ({
       // Raw instantaneous anomaly condition for astronaut c
       const rawAnomaly = !isNominalFlight
         ? (
-            (p && (rawSev === 'CRITICAL' || rawSev === 'WARNING' || hrDeltaPct > 20 || spo2 < 95 || (potassium !== undefined && potassium < 3.5) || (qtc !== undefined && qtc > 450) || (trm !== undefined && trm > 1.6) || (radFlux !== undefined && radFlux > 5.0))) ||
+            (p && (rawSev === 'CRITICAL' || rawSev === 'WARNING' || hrDeltaPct > 20 || spo2 < 95 || (potassium !== undefined && potassium < 3.40) || (qtc !== undefined && qtc > 450) || (trm !== undefined && trm > 1.6) || (radFlux !== undefined && radFlux > 5.0))) ||
             hasCorroboratedDbAlert ||
-            (scenKey.includes('HYPOKALEMIA') && (isTargetCrew || (potassium !== undefined && potassium < 3.5))) ||
+            (scenKey.includes('HYPOKALEMIA') && (isTargetCrew || (potassium !== undefined && potassium < 3.40))) ||
             (scenKey.includes('THROMBOSIS') && (isTargetCrew || (trm !== undefined && trm > 1.6))) ||
             (scenKey.includes('RADIATION') && radFlux !== undefined && radFlux > 5.0) ||
             ((scenKey.includes('CO2') || co2Val > 3.0) && isTargetCrew)

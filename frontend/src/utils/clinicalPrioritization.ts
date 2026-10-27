@@ -362,7 +362,9 @@ export function evaluateCrewClinicalSummary(
 
   // ── Candidate 5: Radiation Exposure (FLUX, DOSE, RSI) ───────────────
   {
-    const isSolarStorm = radFlux >= 10.0 || radDose >= 0.30 || rsi >= 0.35;
+    // Solar particle events (SPE) or acute radiation syndrome:
+    // Requires either elevated flux rate (>= 10.0 mSv/h), acute prodromal dose (>= 0.50 Gy with elevated RSI), or high RSI (>= 0.60).
+    const isSolarStorm = radFlux >= 10.0 || (radDose >= 0.50 && rsi >= 0.40) || rsi >= 0.60;
     let tier: BiomarkerEvaluation['tier'] = 'NOMINAL';
     let urgency = 0;
 
@@ -372,7 +374,8 @@ export function evaluateCrewClinicalSummary(
     } else if (isSolarStorm) {
       tier = 'WARNING';
       urgency = 180 + radFlux * 1.2;
-    } else if (radFlux > 1.0) {
+    } else if (radFlux > 1.0 || radDose >= 0.30) {
+      // Background cosmic accumulation / minor dosimeter drift is sub-nominal monitoring, nominal card presentation
       tier = 'SUB_NOMINAL';
       urgency = 35 + radFlux * 2.0;
     }

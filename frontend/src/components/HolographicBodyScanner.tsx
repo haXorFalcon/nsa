@@ -165,7 +165,7 @@ export const HolographicBodyScanner: React.FC<HolographicBodyScannerProps> = ({
     clinical.severity === 'CRITICAL' ||
     spo2 < 90.0 ||
     hr > 115 ||
-    (telemetry?.potassium !== undefined && telemetry.potassium < 3.0) ||
+    (telemetry?.potassium !== undefined && telemetry.potassium < 3.20) ||
     radFlux > 10.0;
 
   const isWarningAlert = !isCriticalAlert && (
@@ -175,9 +175,9 @@ export const HolographicBodyScanner: React.FC<HolographicBodyScannerProps> = ({
     hr > 88 ||
     spo2 < 96.5 ||
     co2 > 2.8 ||
-    hct > 48.0 ||
+    hct > 51.0 ||
     trm > 1.40 ||
-    (telemetry?.potassium !== undefined && (telemetry.potassium < 3.5 || telemetry.potassium > 5.2))
+    (telemetry?.potassium !== undefined && (telemetry.potassium < 3.40 || telemetry.potassium > 5.2))
   );
 
   const activeSeverity: 'CRITICAL' | 'WARNING' | 'NOMINAL' = isCriticalAlert ? 'CRITICAL' : isWarningAlert ? 'WARNING' : 'NOMINAL';
@@ -189,11 +189,11 @@ export const HolographicBodyScanner: React.FC<HolographicBodyScannerProps> = ({
   const cardiacSeverity: 'CRITICAL' | 'WARNING' | 'NOMINAL' = isCardiacCritical ? 'CRITICAL' : isCardiacWarning ? 'WARNING' : 'NOMINAL';
 
   // 2. Renal & Cortical Perfusion (Fluid Shift & Hemoconcentration)
-  const isRenalCritical = (telemetry?.potassium !== undefined && telemetry.potassium < 3.0) || (primaryBioId === 'hct' && primaryBioTier === 'CRITICAL');
+  const isRenalCritical = (telemetry?.potassium !== undefined && telemetry.potassium < 3.20) || (primaryBioId === 'hct' && primaryBioTier === 'CRITICAL');
   const isRenalAlert = isRenalCritical ||
-    (telemetry?.potassium !== undefined && (telemetry.potassium < 3.5 || telemetry.potassium > 5.2)) ||
+    (telemetry?.potassium !== undefined && (telemetry.potassium < 3.40 || telemetry.potassium > 5.2)) ||
     primaryBioId === 'hct' ||
-    hct > 48.0 ||
+    hct > 51.0 ||
     telemetry?.scenario_phase === 'SCENARIO_14_NEPHROLITHIASIS' ||
     telemetry?.scenario_phase === 'SCENARIO_15_INTRAVASCULAR_DEHYDRATION';
   const renalSeverity: 'CRITICAL' | 'WARNING' | 'NOMINAL' = isRenalCritical ? 'CRITICAL' : isRenalAlert ? 'WARNING' : 'NOMINAL';
@@ -441,8 +441,8 @@ export const HolographicBodyScanner: React.FC<HolographicBodyScannerProps> = ({
     const isoColor = isIsoCritical ? '#ef4444' : isIsoWatch ? '#f59e0b' : '#00e5a3';
 
     // 3. Radiation Hazard (Solar Particle Events & Galactic Cosmic Rays)
-    const isRadCritical = radFlux > 10.0 || radDose > 0.5 || telemetry?.scenario_phase === 'SCENARIO_3_SOLAR_RADIATION_STORM' || (clinical.severity === 'CRITICAL' && primaryBioId === 'flux');
-    const isRadWatch = isRadCritical || radFlux > 0.15 || radDose > 0.1 || (clinical.severity === 'WARNING' && primaryBioId === 'flux');
+    const isRadCritical = radFlux > 10.0 || radDose > 0.80 || telemetry?.scenario_phase === 'SCENARIO_3_SOLAR_RADIATION_STORM' || (clinical.severity === 'CRITICAL' && primaryBioId === 'flux');
+    const isRadWatch = isRadCritical || radFlux > 2.0 || radDose > 0.50 || (clinical.severity === 'WARNING' && primaryBioId === 'flux');
     const radStatus: 'NOMINAL' | 'WATCH' | 'CRITICAL' = isRadCritical ? 'CRITICAL' : isRadWatch ? 'WATCH' : 'NOMINAL';
     const radColor = isRadCritical ? '#ef4444' : isRadWatch ? '#f59e0b' : '#00e5a3';
 
@@ -454,7 +454,7 @@ export const HolographicBodyScanner: React.FC<HolographicBodyScannerProps> = ({
 
     // 5. Gravity Hazard (Microgravity Fluid Shift, Hemoconcentration, Thrombosis & Bone Atrophy)
     const isGravCritical = bmd < 85.0 || trm >= 2.20 || hct >= 53.0 || (primaryBioId === 'hct' && primaryBioTier === 'CRITICAL');
-    const isGravWatch = isGravCritical || bmd < 90.0 || trm >= 1.40 || hct >= 48.0 || (primaryBioId === 'hct' && (primaryBioTier === 'WARNING' || primaryBioTier === 'CRITICAL')) || telemetry?.scenario_phase === 'SCENARIO_8_CARDIOVASCULAR_DECONDITIONING' || telemetry?.scenario_phase === 'SCENARIO_7_VENOUS_THROMBOSIS_RISK' || telemetry?.scenario_phase === 'SCENARIO_15_INTRAVASCULAR_DEHYDRATION';
+    const isGravWatch = isGravCritical || bmd < 90.0 || trm >= 1.40 || hct >= 51.0 || (primaryBioId === 'hct' && (primaryBioTier === 'WARNING' || primaryBioTier === 'CRITICAL')) || telemetry?.scenario_phase === 'SCENARIO_8_CARDIOVASCULAR_DECONDITIONING' || telemetry?.scenario_phase === 'SCENARIO_7_VENOUS_THROMBOSIS_RISK' || telemetry?.scenario_phase === 'SCENARIO_15_INTRAVASCULAR_DEHYDRATION';
     const gravStatus: 'NOMINAL' | 'WATCH' | 'CRITICAL' = isGravCritical ? 'CRITICAL' : isGravWatch ? 'WATCH' : 'NOMINAL';
     const gravColor = isGravCritical ? '#ef4444' : isGravWatch ? '#f59e0b' : '#00e5a3';
 
