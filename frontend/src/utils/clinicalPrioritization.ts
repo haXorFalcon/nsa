@@ -295,15 +295,18 @@ export function evaluateCrewClinicalSummary(
     let tier: BiomarkerEvaluation['tier'] = 'NOMINAL';
     let urgency = 0;
 
+    // Clinically calibrated: Microgravity cephalic fluid shift resets baseline serum K⁺ ~3.45-3.55 mmol/L.
+    // True hypokalemia warning threshold is < 3.40 mmol/L (or hyperkalemia > 5.20 mmol/L).
+    // Critical dysrhythmia risk threshold is < 3.20 mmol/L (or > 5.50 mmol/L).
     if (k < 3.20 || k > 5.50) {
       tier = 'CRITICAL';
-      const dev = k < 3.2 ? (3.5 - k) : (k - 5.0);
+      const dev = k < 3.2 ? (3.2 - k) : (k - 5.5);
       urgency = 420 + dev * 180.0;
-    } else if (k < 3.50 || k > 5.10) {
+    } else if (k < 3.40 || k > 5.20) {
       tier = 'WARNING';
-      const dev = k < 3.5 ? (3.5 - k) : (k - 5.1);
+      const dev = k < 3.4 ? (3.4 - k) : (k - 5.2);
       urgency = 250 + dev * 120.0;
-    } else if (k < 3.70 || k > 4.90) {
+    } else if (k < 3.65 || k > 4.90) {
       tier = 'SUB_NOMINAL';
       urgency = 45 + Math.abs(d.pct) * 1.5;
     }
@@ -320,7 +323,7 @@ export function evaluateCrewClinicalSummary(
       isPositiveDelta: d.isPositive,
       tier,
       urgencyScore: urgency,
-      clinicalMeaning: k < 3.5 ? 'Hypokalemic Ventricular Vulnerability' : k > 5.1 ? 'Hyperkalemic Conduction Block' : 'Membrane Potential Stable',
+      clinicalMeaning: k < 3.4 ? 'Hypokalemic Ventricular Vulnerability' : k > 5.2 ? 'Hyperkalemic Conduction Block' : 'Membrane Potential Stable',
     });
   }
 
