@@ -489,7 +489,7 @@ services:
     region: oregon
     plan: standard
     buildCommand: |
-      cd frontend && npm install && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save && npm run build && cd ..
+      npm install && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save && (cd frontend && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save) && npm run build
       pip install -r requirements.txt
     startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
     envVars:

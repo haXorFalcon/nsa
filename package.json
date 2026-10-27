@@ -10,5 +10,10 @@
     "build": "npm --prefix frontend run build",
     "lint": "npm --prefix frontend run lint",
     "preview": "npm --prefix frontend run preview"
+  },
+  "optionalDependencies": {
+    "@rolldown/binding-linux-x64-gnu": "^1.2.15",
+    "@rolldown/binding-win32-x64-msvc": "^1.2.15",
+    "lightningcss-linux-x64-gnu": "^1.33.0"
   }
 }

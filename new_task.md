@@ -1,8 +1,11 @@
+==> Cloning from https://github.com/haXorFalcon/nsa
+==> Checking out commit 51fb32f5ed685ae034a39e37b2cfeadc2af18cca in branch main
+==> Using Python version 3.11.9 via environment variable PYTHON_VERSION
 ==> Docs on specifying a Python version: https://render.com/docs/python-version
 ==> Installing Python version 3.11.9...
 ==> Using Poetry version 2.1.3 (default)
 ==> Docs on specifying a Poetry version: https://render.com/docs/poetry-version
-==> Running build command 'cd frontend && npm ci && npm run build && cd .. && pip install -r requirements.txt'...
+==> Running build command 'cd frontend && npm install && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save && npm run build && cd .. && pip install -r requirements.txt'...
 ==> Using Node.js version 20.12.0 via environment variable NODE_VERSION
 ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
 ==> Installing Node.js version 20.12.0...
@@ -10,6 +13,13 @@
 added 36 packages, and audited 38 packages in 2s
 
 10 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+added 1 package, and audited 39 packages in 580ms
+
+11 packages are looking for funding
   run `npm fund` for details
 
 found 0 vulnerabilities

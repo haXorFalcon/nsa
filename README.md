@@ -253,7 +253,7 @@ See [`documentation/dataset_coverage_analysis.md`](documentation/dataset_coverag
 - **Environment**: `Python`
 - **Build Command**:
   ```bash
-  cd frontend && npm install && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save && npm run build && cd .. && pip install -r requirements.txt
+  npm install && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save && (cd frontend && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save) && npm run build && pip install -r requirements.txt
   ```
 - **Start Command**:
   ```bash

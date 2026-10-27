@@ -9,10 +9,7 @@ services:
     region: oregon # or ohio, frankfurt, singapore
     plan: free # Can run smoothly on free tier with DETERMINISTIC_FALLBACK_ACTIVE
     buildCommand: |
-      # 1. Install dependencies and explicit Linux native bundler binaries to bypass npm issue #4828
-      cd frontend && npm install && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save && npm run build && cd ..
-      # 2. Install lightweight Python aerospace backend dependencies
-      pip install -r requirements.txt
+      npm install && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save && (cd frontend && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save) && npm run build && pip install -r requirements.txt
     startCommand: cd backend && python -m uvicorn app.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /api/telemetry/latest-all
     autoDeploy: true
