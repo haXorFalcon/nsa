@@ -248,7 +248,21 @@ See [`documentation/dataset_coverage_analysis.md`](documentation/dataset_coverag
 
 ## Deployment
 
-`render.yaml` contains a Render blueprint that builds the React frontend, installs the Python dependencies, and starts the FastAPI service. Configure any optional API keys in the deployment environment rather than committing them to the repository.
+`render.yaml` contains a production-ready Render Blueprint. If configuring manually in the Render Dashboard:
+
+- **Environment**: `Python`
+- **Build Command**:
+  ```bash
+  cd frontend && npm install && npm install @rolldown/binding-linux-x64-gnu@1.2.15 lightningcss-linux-x64-gnu@1.33.0 --no-save && npm run build && cd .. && pip install -r requirements.txt
+  ```
+- **Start Command**:
+  ```bash
+  uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+  ```
+- **Environment Variables**:
+  - `NODE_VERSION`: `20.12.0`
+  - `PYTHON_VERSION`: `3.11.9`
+  - `DETERMINISTIC_FALLBACK_ACTIVE`: `true`
 
 ## Known limitations
 
